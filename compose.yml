@@ -1,15 +1,15 @@
 services:
-  zord-http:
+  zpe-systems-http:
     build:
       context: .
       dockerfile: docker/dev/Dockerfile
-    container_name: zord-http
+    container_name: zpe-systems-http
     env_file:
       - .env
     ports:
       - "9000:9000"
     depends_on:
-      zord-mysql:
+      zpe-systems-mysql:
         condition: service_healthy
     volumes:
       - ./:/app
@@ -22,9 +22,9 @@ services:
           cpus: '1'
           memory: 512M
 
-  zord-mysql:
-    image: mysql:latest
-    container_name: zord-mysql
+  zpe-systems-mysql:
+    image: mysql:8
+    container_name: zpe-systems-mysql
     healthcheck:
       test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
       start_period: 5s
@@ -35,7 +35,7 @@ services:
         MYSQL_ROOT_PASSWORD: root
         MYSQL_DATABASE: test
     ports:
-        - "3307:3306"
+        - "3306:3306"
     volumes:
         - storage:/var/lib/mysql
     deploy:

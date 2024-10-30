@@ -1,9 +1,14 @@
 # Zord Microframework
 ## Build your mecha
 
-GOlang base repository with code gen to create a fast golang project based on hexagonal architeture
+ZPE Systems technical test using my own framework.
 
 ---
+
+to start the project is needed to create a .env from .env.example and after start all containers run the migrate command inside the container or just run anything built with 
+---
+the swagger documentation is in /swagger/index.html route, if you`re using the default port and docker will be http://localhost:9000/swagger/index.html
+
 
 # Development
 > Remember to create your .env file based on .env.example
