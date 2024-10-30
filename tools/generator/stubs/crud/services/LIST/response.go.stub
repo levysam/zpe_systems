@@ -1,0 +1,9 @@
+package {{domain}}
+
+import domain "go-skeleton/internal/application/domain/{{domain}}"
+
+type Response struct {
+	CurrentPage int
+	TotalPages  int64
+	Data   *[]domain.{{domainPascalCase}}
+}
