@@ -1,7 +1,15 @@
 package cmd
 
 import (
-	dummyRepository "go-skeleton/internal/repositories/dummy"
+	sqladapter "github.com/Blank-Xu/sql-adapter"
+	"github.com/casbin/casbin/v2"
+	"github.com/golang-jwt/jwt/v5"
+	usersRepository "go-skeleton/internal/repositories/users"
+	"go-skeleton/pkg/crypt"
+	"go-skeleton/pkg/jwtExtractor"
+	"go-skeleton/pkg/roles"
+	"go-skeleton/pkg/signerVerifier"
+
 	//{{codeGen5}}
 	"go-skeleton/pkg/config"
 	"go-skeleton/pkg/database"
@@ -42,18 +50,40 @@ func Setup() {
 		conf.ReadConfig("DB_DATABASE"),
 	)
 
-	idC := idCreator.NewIdCreator()
 	val := validator.NewValidator()
 
 	db.Connect()
 	val.Boot()
+
+	idC := idCreator.NewIdCreator()
+
+	encryptPkg := crypt.NewCrypt()
+
+	sqlAdapter, adapterErr := sqladapter.NewAdapter(db.Db.DB, "mysql", "roles")
+	if adapterErr != nil {
+		panic(adapterErr)
+	}
+
+	enforcer, enforcerErr := casbin.NewEnforcer("pkg/roles/rbac.conf", sqlAdapter)
+	if enforcerErr != nil {
+		panic(enforcerErr)
+	}
+	rolesController := roles.NewCasbinRule(enforcer)
+
+	jwtSignVerifierController := signerVerifier.NewSigner(conf.ReadConfig("JWT_SECRET"))
+	jwtParser := jwt.NewParser()
+	extractor := jwtExtractor.NewJWTExtractor(jwtParser)
 
 	Reg = registry.NewRegistry()
 	Reg.Provide("logger", l)
 	Reg.Provide("validator", val)
 	Reg.Provide("config", conf)
 	Reg.Provide("idCreator", idC)
+	Reg.Provide("crypt", encryptPkg)
+	Reg.Provide("roles", rolesController)
+	Reg.Provide("signerVerifier", jwtSignVerifierController)
+	Reg.Provide("jwtExtractor", extractor)
 
-	Reg.Provide("dummyRepository", dummyRepository.NewDummyRepository(db.Db))
+	Reg.Provide("usersRepository", usersRepository.NewUsersRepository(db.Db))
 	//{{codeGen6}}
 }

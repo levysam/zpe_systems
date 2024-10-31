@@ -43,10 +43,11 @@ func (hs *Server) Start() {
 	}
 
 	server.Use(middleware.Recover())
-	server.Use(middlewares.SetTenant)
 
 	public := server.Group("")
-	private := server.Group("")
+
+	authMiddleware := middlewares.NewAuthMiddleware(hs.registry)
+	private := server.Group("", authMiddleware.Middleware)
 
 	allRoutes := routes.GetRoutes(hs.registry)
 

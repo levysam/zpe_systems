@@ -15,7 +15,7 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
-        "/dummy": {
+        "/enforce": {
             "get": {
                 "consumes": [
                     "application/json"
@@ -24,9 +24,465 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "Dummy"
+                    "Enforce"
                 ],
-                "summary": "List Dummy",
+                "summary": "Enforce",
+                "parameters": [
+                    {
+                        "description": "body model",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/go-skeleton_internal_application_services_enforce.Data"
+                        }
+                    },
+                    {
+                        "type": "string",
+                        "description": "JWT Auth",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/go-skeleton_internal_application_services_enforce.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/go-skeleton_internal_application_services.Error"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/go-skeleton_internal_application_services.Error"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/go-skeleton_internal_application_services.Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/login": {
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Login"
+                ],
+                "summary": "Login",
+                "parameters": [
+                    {
+                        "description": "body model",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/go-skeleton_internal_application_services_login.Data"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/go-skeleton_internal_application_services_login.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/go-skeleton_internal_application_services.Error"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/go-skeleton_internal_application_services.Error"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/go-skeleton_internal_application_services.Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/roles": {
+            "get": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Roles"
+                ],
+                "summary": "Get Roles",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "JWT Auth",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/go-skeleton_internal_application_services_roles_LIST.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/go-skeleton_internal_application_services.Error"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/go-skeleton_internal_application_services.Error"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/go-skeleton_internal_application_services.Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/roles/add_resource_permission": {
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Roles"
+                ],
+                "summary": "Roles",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "JWT Auth",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "description": "body model",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/go-skeleton_internal_application_services_roles_ADD_RESOURCE_PERMISSION_TO_ROLE.Data"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/go-skeleton_internal_application_services_roles_ADD_RESOURCE_PERMISSION_TO_ROLE.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/go-skeleton_internal_application_services.Error"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/go-skeleton_internal_application_services.Error"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/go-skeleton_internal_application_services.Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/roles/deleteFromUser/{role}/{userId}": {
+            "delete": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Roles"
+                ],
+                "summary": "Roles",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "JWT Auth",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Role Name",
+                        "name": "role",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "User id",
+                        "name": "userId",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/go-skeleton_internal_application_services_roles_ADD_RESOURCE_PERMISSION_TO_ROLE.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/go-skeleton_internal_application_services.Error"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/go-skeleton_internal_application_services.Error"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/go-skeleton_internal_application_services.Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/roles/deletePermission/{role}/{resource}": {
+            "delete": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Roles"
+                ],
+                "summary": "Roles",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "JWT Auth",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Role Name",
+                        "name": "role",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Resource Name",
+                        "name": "resource",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/go-skeleton_internal_application_services_roles_ADD_RESOURCE_PERMISSION_TO_ROLE.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/go-skeleton_internal_application_services.Error"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/go-skeleton_internal_application_services.Error"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/go-skeleton_internal_application_services.Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/roles/setToUser": {
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Roles"
+                ],
+                "summary": "Roles",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "JWT Auth",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "description": "body model",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/go-skeleton_internal_application_services_roles_SET_ROLE_TO_USER.Data"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/go-skeleton_internal_application_services_roles_ADD_RESOURCE_PERMISSION_TO_ROLE.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/go-skeleton_internal_application_services.Error"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/go-skeleton_internal_application_services.Error"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/go-skeleton_internal_application_services.Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/roles/{role}": {
+            "delete": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Roles"
+                ],
+                "summary": "Roles",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "JWT Auth",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Role Name",
+                        "name": "role",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/go-skeleton_internal_application_services_roles_ADD_RESOURCE_PERMISSION_TO_ROLE.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/go-skeleton_internal_application_services.Error"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/go-skeleton_internal_application_services.Error"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/go-skeleton_internal_application_services.Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/users": {
+            "get": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Users"
+                ],
+                "summary": "List Users",
                 "parameters": [
                     {
                         "type": "integer",
@@ -37,28 +493,17 @@ const docTemplate = `{
                     },
                     {
                         "type": "string",
-                        "description": "value example: eql|lik,value",
-                        "name": "name",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "description": "value example: lik,value",
-                        "name": "email",
-                        "in": "query"
-                    },
-                    {
-                        "type": "string",
-                        "description": "tenant name",
-                        "name": "Tenant",
-                        "in": "header"
+                        "description": "JWT Auth",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/go-skeleton_internal_application_services_dummy_LIST.Response"
+                            "$ref": "#/definitions/go-skeleton_internal_application_services_users_LIST.Response"
                         }
                     },
                     "400": {
@@ -89,9 +534,9 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "Dummy"
+                    "Users"
                 ],
-                "summary": "Create Dummy",
+                "summary": "Create Users",
                 "parameters": [
                     {
                         "description": "body model",
@@ -99,21 +544,22 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/go-skeleton_internal_application_services_dummy_CREATE.Data"
+                            "$ref": "#/definitions/go-skeleton_internal_application_services_users_CREATE.Data"
                         }
                     },
                     {
                         "type": "string",
-                        "description": "tenant name",
-                        "name": "Tenant",
-                        "in": "header"
+                        "description": "JWT Auth",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/go-skeleton_internal_application_services_dummy_CREATE.Response"
+                            "$ref": "#/definitions/go-skeleton_internal_application_services_users_CREATE.Response"
                         }
                     },
                     "400": {
@@ -137,7 +583,63 @@ const docTemplate = `{
                 }
             }
         },
-        "/dummy/{dummy_id}": {
+        "/users/{user_id}": {
+            "delete": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Delete Users",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Users ID",
+                        "name": "users_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "JWT Auth",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/go-skeleton_internal_application_services_users_DELETE.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/go-skeleton_internal_application_services.Error"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/go-skeleton_internal_application_services.Error"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/go-skeleton_internal_application_services.Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/users/{users_id}": {
             "get": {
                 "consumes": [
                     "application/json"
@@ -146,29 +648,30 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "Dummy"
+                    "Users"
                 ],
-                "summary": "Get a Dummy",
+                "summary": "Get a Users",
                 "parameters": [
                     {
                         "type": "string",
-                        "description": "Dummy ID",
-                        "name": "dummy_id",
+                        "description": "Users ID",
+                        "name": "users_id",
                         "in": "path",
                         "required": true
                     },
                     {
                         "type": "string",
-                        "description": "tenant name",
-                        "name": "Tenant",
-                        "in": "header"
+                        "description": "JWT Auth",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/go-skeleton_internal_application_services_dummy_GET.Response"
+                            "$ref": "#/definitions/go-skeleton_internal_application_services_users_GET.Response"
                         }
                     },
                     "400": {
@@ -199,14 +702,14 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "Dummy"
+                    "Users"
                 ],
-                "summary": "Edit Dummy",
+                "summary": "Edit Users",
                 "parameters": [
                     {
                         "type": "string",
-                        "description": "Dummy ID",
-                        "name": "dummy_id",
+                        "description": "Users ID",
+                        "name": "users_id",
                         "in": "path",
                         "required": true
                     },
@@ -216,74 +719,22 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/go-skeleton_internal_application_services_dummy_EDIT.Data"
+                            "$ref": "#/definitions/go-skeleton_internal_application_services_users_EDIT.Data"
                         }
                     },
                     {
                         "type": "string",
-                        "description": "tenant name",
-                        "name": "Tenant",
-                        "in": "header"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/go-skeleton_internal_application_services_dummy_EDIT.Response"
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "schema": {
-                            "$ref": "#/definitions/go-skeleton_internal_application_services.Error"
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found",
-                        "schema": {
-                            "$ref": "#/definitions/go-skeleton_internal_application_services.Error"
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "schema": {
-                            "$ref": "#/definitions/go-skeleton_internal_application_services.Error"
-                        }
-                    }
-                }
-            },
-            "delete": {
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "Dummy"
-                ],
-                "summary": "Delete Dummy",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "Dummy ID",
-                        "name": "dummy_id",
-                        "in": "path",
+                        "description": "JWT Auth",
+                        "name": "Authorization",
+                        "in": "header",
                         "required": true
-                    },
-                    {
-                        "type": "string",
-                        "description": "tenant name",
-                        "name": "Tenant",
-                        "in": "header"
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/go-skeleton_internal_application_services_dummy_DELETE.Response"
+                            "$ref": "#/definitions/go-skeleton_internal_application_services_users_EDIT.Response"
                         }
                     },
                     "400": {
@@ -309,20 +760,6 @@ const docTemplate = `{
         }
     },
     "definitions": {
-        "go-skeleton_internal_application_domain_dummy.Dummy": {
-            "type": "object",
-            "properties": {
-                "DummyName": {
-                    "type": "string"
-                },
-                "Email": {
-                    "type": "string"
-                },
-                "ID": {
-                    "type": "string"
-                }
-            }
-        },
         "go-skeleton_internal_application_services.Error": {
             "type": "object",
             "properties": {
@@ -335,32 +772,132 @@ const docTemplate = `{
                 }
             }
         },
-        "go-skeleton_internal_application_services_dummy_CREATE.Data": {
+        "go-skeleton_internal_application_services_enforce.Data": {
             "type": "object",
-            "required": [
-                "DummyName",
-                "Email"
-            ],
             "properties": {
-                "DummyName": {
-                    "type": "string",
-                    "maxLength": 32,
-                    "minLength": 3
+                "Method": {
+                    "type": "string"
                 },
-                "Email": {
+                "Resource": {
+                    "type": "string"
+                },
+                "UserId": {
                     "type": "string"
                 }
             }
         },
-        "go-skeleton_internal_application_services_dummy_CREATE.Response": {
+        "go-skeleton_internal_application_services_enforce.Response": {
             "type": "object",
             "properties": {
-                "Data": {
-                    "$ref": "#/definitions/go-skeleton_internal_application_domain_dummy.Dummy"
+                "Allowed": {
+                    "type": "boolean"
                 }
             }
         },
-        "go-skeleton_internal_application_services_dummy_DELETE.Response": {
+        "go-skeleton_internal_application_services_login.Data": {
+            "type": "object",
+            "properties": {
+                "Email": {
+                    "type": "string"
+                },
+                "Password": {
+                    "type": "string"
+                }
+            }
+        },
+        "go-skeleton_internal_application_services_login.Response": {
+            "type": "object",
+            "properties": {
+                "AccessToken": {
+                    "type": "string"
+                }
+            }
+        },
+        "go-skeleton_internal_application_services_roles_ADD_RESOURCE_PERMISSION_TO_ROLE.Data": {
+            "type": "object",
+            "properties": {
+                "Actions": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "Resource": {
+                    "type": "string"
+                },
+                "Role": {
+                    "type": "string"
+                }
+            }
+        },
+        "go-skeleton_internal_application_services_roles_ADD_RESOURCE_PERMISSION_TO_ROLE.Response": {
+            "type": "object",
+            "properties": {
+                "Result": {
+                    "type": "string"
+                }
+            }
+        },
+        "go-skeleton_internal_application_services_roles_LIST.Response": {
+            "type": "object",
+            "properties": {
+                "Roles": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "go-skeleton_internal_application_services_roles_SET_ROLE_TO_USER.Data": {
+            "type": "object",
+            "properties": {
+                "RolesName": {
+                    "type": "string"
+                },
+                "UserId": {
+                    "type": "string"
+                }
+            }
+        },
+        "go-skeleton_internal_application_services_users_CREATE.Data": {
+            "type": "object",
+            "required": [
+                "Email",
+                "Name",
+                "Password",
+                "Roles"
+            ],
+            "properties": {
+                "Email": {
+                    "type": "string"
+                },
+                "Id": {
+                    "type": "string"
+                },
+                "Name": {
+                    "type": "string"
+                },
+                "Password": {
+                    "type": "string"
+                },
+                "Roles": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "go-skeleton_internal_application_services_users_CREATE.Response": {
+            "type": "object",
+            "properties": {
+                "Created": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "go-skeleton_internal_application_services_users_DELETE.Response": {
             "type": "object",
             "properties": {
                 "Message": {
@@ -368,38 +905,74 @@ const docTemplate = `{
                 }
             }
         },
-        "go-skeleton_internal_application_services_dummy_EDIT.Data": {
+        "go-skeleton_internal_application_services_users_EDIT.Data": {
             "type": "object",
-            "required": [
-                "DummyName",
-                "Email"
-            ],
             "properties": {
-                "DummyName": {
-                    "type": "string"
-                },
                 "Email": {
                     "type": "string"
+                },
+                "Name": {
+                    "type": "string"
                 }
             }
         },
-        "go-skeleton_internal_application_services_dummy_EDIT.Response": {
+        "go-skeleton_internal_application_services_users_EDIT.Response": {
             "type": "object",
             "properties": {
                 "Data": {
-                    "$ref": "#/definitions/go-skeleton_internal_application_services_dummy_EDIT.Data"
+                    "$ref": "#/definitions/go-skeleton_internal_application_services_users_EDIT.Data"
                 }
             }
         },
-        "go-skeleton_internal_application_services_dummy_GET.Response": {
+        "go-skeleton_internal_application_services_users_GET.Response": {
             "type": "object",
             "properties": {
                 "Data": {
-                    "$ref": "#/definitions/go-skeleton_internal_application_domain_dummy.Dummy"
+                    "$ref": "#/definitions/go-skeleton_internal_application_services_users_GET.UserResponse"
                 }
             }
         },
-        "go-skeleton_internal_application_services_dummy_LIST.Response": {
+        "go-skeleton_internal_application_services_users_GET.UserResponse": {
+            "type": "object",
+            "properties": {
+                "Email": {
+                    "type": "string"
+                },
+                "Id": {
+                    "type": "string"
+                },
+                "Name": {
+                    "type": "string"
+                },
+                "Roles": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "go-skeleton_internal_application_services_users_LIST.DataResponse": {
+            "type": "object",
+            "properties": {
+                "Email": {
+                    "type": "string"
+                },
+                "Id": {
+                    "type": "string"
+                },
+                "Name": {
+                    "type": "string"
+                },
+                "Roles": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "go-skeleton_internal_application_services_users_LIST.Response": {
             "type": "object",
             "properties": {
                 "CurrentPage": {
@@ -408,7 +981,7 @@ const docTemplate = `{
                 "Data": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/go-skeleton_internal_application_domain_dummy.Dummy"
+                        "$ref": "#/definitions/go-skeleton_internal_application_services_users_LIST.DataResponse"
                     }
                 },
                 "TotalPages": {

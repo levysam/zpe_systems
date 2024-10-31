@@ -30,6 +30,18 @@ type Validator interface {
 	ValidateStruct(modelData any) []error
 }
 
+type PermissionsManager interface {
+	CheckPermission(user string, resource string, action string) (allowed bool, err error)
+	SetRoleToUser(user string, role string) (changed bool, err error)
+	DeleteRoleFromUser(user string, role string) (changed bool, err error)
+	ListUserRoles(user string) (roles []string, err error)
+	AddPermissionToRole(role string, resource, action string) (changed bool, err error)
+	DeleteRole(role string) (changed bool, err error)
+	DeletePermissionFromRole(role, resource string) (changed bool, err error)
+	ListRoles() (roles []string, err error)
+	SetRoleToUserBatch(user string, roles []string) (changed bool, err error)
+}
+
 type Error struct {
 	Status  int
 	Message interface{}

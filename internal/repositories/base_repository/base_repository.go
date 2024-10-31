@@ -80,6 +80,7 @@ func (repo *BaseRepo[Domain]) NewFilters() *QueryBuilder {
 }
 
 func (repo *BaseRepo[Domain]) Get(Data Domain, field string, value string) (*Domain, error) {
+	fmt.Println(value)
 	row := repo.Mysql.QueryRowx(
 		fmt.Sprintf(
 			"SELECT %s FROM %s WHERE %s = ?",
