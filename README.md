@@ -1,12 +1,30 @@
-# Zord Microframework
-## Build your mecha
+ZPE Systems technical test
+---                            
 
-ZPE Systems technical test using my own framework.
+This project is made using zord-microframework, my project to create golang projects faster. It is based on hexagonal architecture and using casbin RBAC from roles control, the idea is to manage and enforce permissions for another projects.
 
 ---
 
-to start the project is needed to create a .env from .env.example and after start all containers run the migrate command inside the container or just run anything built with 
----
+To find the http layer implementation go to /cmd/http
+To find all business rules go to /internal/application/services
+To find casbin calls and other external libs and reqs go to /pkg
+
+### to start the project is needed to create a .env from .env.example and after start all containers run the migrate command inside the container
+### after run the migration script run the seed.sql script on your database to set up the admin user and the 3 predefined roles
+user:
+```
+email: admin@admin.com
+password: 123456
+role: admin
+```
+
+predefined roles:
+```
+admin: can do everything
+modifier: can list and edit anything
+watcher: can list and detail
+```
+
 the swagger documentation is in /swagger/index.html route, if you`re using the default port and docker will be http://localhost:9000/swagger/index.html
 
 

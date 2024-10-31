@@ -62,11 +62,13 @@ func (s *Service) produceResponseRule(data *Data, domain *users.Users) {
 		s.InternalServerError("error on create", err)
 		return
 	}
-	_, setRoleErr := s.permissions.SetRoleToUserBatch(domain.Id, data.Roles)
-	if setRoleErr != nil {
-		tx.Rollback()
-		s.InternalServerError("error on setRole", setRoleErr)
-		return
+	if len(data.Roles) > 0 {
+		_, setRoleErr := s.permissions.SetRoleToUserBatch(domain.Id, data.Roles)
+		if setRoleErr != nil {
+			tx.Rollback()
+			s.InternalServerError("error on setRole", setRoleErr)
+			return
+		}
 	}
 
 	commitErr := tx.Commit()

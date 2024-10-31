@@ -10,7 +10,7 @@ type Data struct {
 	Id       string   `db:"ID"`
 	Name     string   `db:"Name" validate:"required"`
 	Email    string   `db:"Email" validate:"required"`
-	Roles    []string `db:"Role" validate:"required"`
+	Roles    []string `db:"Role"`
 	Password string   `db:"Password" validate:"required"`
 }
 
