@@ -27,6 +27,11 @@ watcher: can list and detail
 
 the swagger documentation is in /swagger/index.html route, if you`re using the default port and docker will be http://localhost:9000/swagger/index.html
 
+---
+
+After manage your users, roles and permissions validate that using the /enforce route, that can be used as a middleware
+for other microservices, if is a small system and don`t need a microservices architecture just add new routes as private
+at /cmd/http/routes and let the auth middleware handle the permissions.
 
 # Development
 > Remember to create your .env file based on .env.example
